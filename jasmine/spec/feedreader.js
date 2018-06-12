@@ -83,7 +83,6 @@ $(function() {
           });
     });
 
-    var feedEntries = null;
     /* TODO: Write a new test suite named "Initial Entries" */
     describe('Initial Entries', function() {
 
@@ -102,7 +101,7 @@ $(function() {
 
          it('have entry', function() {
            var container = $('.feed');
-           feedEntries = container.find('.entry');
+           var feedEntries = container.find('.entry');
            expect(feedEntries.length).toBeGreaterThan(0);
          });
 
@@ -115,7 +114,10 @@ $(function() {
         * Remember, loadFeed() is asynchronous.
         */
 
+        var feedEntries = [];
         beforeEach(function(done) {
+          var container = $('.feed');
+          var feedEntries = container.find('.entry');
           loadFeed(1);
           setTimeout(function() {
             done();
