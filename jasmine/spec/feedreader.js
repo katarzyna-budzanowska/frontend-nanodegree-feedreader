@@ -45,6 +45,14 @@ $(function() {
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
+         it('feed name not empty', function() {
+           const testName = function(feed) {
+             expect(feed.name).toBeDefined();
+             expect(feed.name).toEqual(jasmine.any(String));
+             expect(feed.name).not.toBe('');
+           };
+           allFeeds.forEach(testName);
+         })
     });
 
 
