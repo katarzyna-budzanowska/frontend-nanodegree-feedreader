@@ -82,6 +82,8 @@ $(function() {
             expect($('body').hasClass('menu-hidden')).toBe(true);
           });
     });
+
+    var feedEntries = null;
     /* TODO: Write a new test suite named "Initial Entries" */
     describe('Initial Entries', function() {
 
@@ -100,15 +102,32 @@ $(function() {
 
          it('have entry', function() {
            var container = $('.feed');
-           var entries = container.find('.entry');
-           expect(entries.length).toBeGreaterThan(0);
+           feedEntries = container.find('.entry');
+           expect(feedEntries.length).toBeGreaterThan(0);
          });
 
     });
     /* TODO: Write a new test suite named "New Feed Selection" */
 
+     describe('New Feed Selection', function() {
         /* TODO: Write a test that ensures when a new feed is loaded
-         * by the loadFeed function that the content actually changes.
-         * Remember, loadFeed() is asynchronous.
-         */
+        * by the loadFeed function that the content actually changes.
+        * Remember, loadFeed() is asynchronous.
+        */
+
+        beforeEach(function(done) {
+          loadFeed(1);
+          setTimeout(function() {
+            done();
+          }, 4000);
+        });
+
+        it('has changed entries', function() {
+          var container = $('.feed');
+          var newFeedEntries = container.find('.entry');
+          expect(newFeedEntries.length).toBeGreaterThan(0);
+          expect(newFeedEntries[0].isEqualNode(feedEntries[0])).toBe(false);
+          expect(newFeedEntries.slice(-1)[0].isEqualNode(feedEntries.slice(-1)[0])).toBe(false);
+        });
+     });
 }());
