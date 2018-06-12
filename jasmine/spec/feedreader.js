@@ -116,12 +116,7 @@ $(function() {
 
         var feedEntries = [];
         beforeEach(function(done) {
-          var container = $('.feed');
-          var feedEntries = container.find('.entry');
-          loadFeed(1);
-          setTimeout(function() {
-            done();
-          }, 4000);
+          loadFeed(1, done);
         });
 
         it('has changed entries', function() {
