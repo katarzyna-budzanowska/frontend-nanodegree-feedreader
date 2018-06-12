@@ -83,6 +83,7 @@ $(function() {
           });
     });
     /* TODO: Write a new test suite named "Initial Entries" */
+    describe('Initial Entries', function() {
 
         /* TODO: Write a test that ensures when the loadFeed
          * function is called and completes its work, there is at least
@@ -91,6 +92,19 @@ $(function() {
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
 
+         beforeEach(function(done) {
+           setTimeout(function() {
+             done();
+           }, 4000);
+         });
+
+         it('have entry', function() {
+           var container = $('.feed');
+           var entries = container.find('.entry');
+           expect(entries.length).toBeGreaterThan(0);
+         });
+
+    });
     /* TODO: Write a new test suite named "New Feed Selection" */
 
         /* TODO: Write a test that ensures when a new feed is loaded
