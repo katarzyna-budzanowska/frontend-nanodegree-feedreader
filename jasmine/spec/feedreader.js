@@ -33,6 +33,7 @@ $(function() {
          */
          it('feed url not empty', function() {
            const testURL = function(feed) {
+             // Check that URL is a defined and not empty String.
              expect(feed.url).toBeDefined();
              expect(feed.url).toEqual(jasmine.any(String));
              expect(feed.url).not.toBe('');
@@ -47,6 +48,7 @@ $(function() {
          */
          it('feed name not empty', function() {
            const testName = function(feed) {
+             // Check that name is a defined and not empty String.
              expect(feed.name).toBeDefined();
              expect(feed.name).toEqual(jasmine.any(String));
              expect(feed.name).not.toBe('');
@@ -66,6 +68,7 @@ $(function() {
          * hiding/showing of the menu element.
          */
         it('is hidden by default', function() {
+          // menu-hidden class hides the manu panel.
           expect($('body').hasClass('menu-hidden')).toBe(true);
         });
 
@@ -75,7 +78,8 @@ $(function() {
           * clicked and does it hide when clicked again.
           */
           it('is visible when menu icon is clicked', function() {
-            menuIcon = $('.menu-icon-link');
+            const menuIcon = $('.menu-icon-link');
+            // Click should toggle menu-hidden class.
             menuIcon.trigger( "click" );
             expect($('body').hasClass('menu-hidden')).toBe(false);
             menuIcon.trigger( "click" );
@@ -94,6 +98,7 @@ $(function() {
          */
 
          beforeEach(function(done) {
+           // Wait for initial feed load.
            setTimeout(function() {
              done();
            }, 4000);
@@ -116,13 +121,16 @@ $(function() {
 
         var feedEntries = [];
         beforeEach(function(done) {
+          // Use done as a callback to indicate finished load.
           loadFeed(1, done);
         });
 
         it('has changed entries', function() {
           var container = $('.feed');
           var newFeedEntries = container.find('.entry');
+          // Check if after second feed load we still have some entries.
           expect(newFeedEntries.length).toBeGreaterThan(0);
+          // Compare first and last entries from previous and current feed load.
           expect(newFeedEntries[0].isEqualNode(feedEntries[0])).toBe(false);
           expect(newFeedEntries.slice(-1)[0].isEqualNode(feedEntries.slice(-1)[0])).toBe(false);
         });
